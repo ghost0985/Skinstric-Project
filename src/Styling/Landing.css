@@ -1,7 +1,11 @@
+/* ==========================
+   FONTS & GLOBAL BASE RESET
+   ========================== */
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,700&display=swap');
 
 * {
     box-sizing: border-box;
+    text-decoration: none;
 }
 
 body,
@@ -10,16 +14,21 @@ html {
     font-family: 'Satoshi', 'Inter', Arial, sans-serif;
 }
 
+/* ==========================
+   CONTAINER
+   ========================== */
 .landing-container {
     overflow-x: hidden;
 }
 
+/* ==========================
+   SIDE CHEVRONS & NAV BUTTONS
+   ========================== */
 .side-chevron {
     position: absolute;
     top: 0;
     height: 100vh;
     width: 18vw;
-    pointer-events: none;
     z-index: 1;
 }
 
@@ -44,7 +53,6 @@ html {
     display: flex;
     z-index: 2;
     justify-content: center;
-    pointer-events: none;
 }
 
 .chevron-content .side-btn {
@@ -61,52 +69,17 @@ html {
     padding-left: 50px;
 }
 
-.landing-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 16px 16px 0 16px;
-    width: 100vw;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-}
-
-.landing-logo {
-    font-size: 15px;
-    font-weight: 600;
+.side-btn {
     display: flex;
     align-items: center;
-    gap: 10px;
-}
-
-.skinstric-bold {
+    gap: 12px;
     font-weight: 600;
-    padding: 2px 8px;
-    font-size: 14px;
-}
-
-.landing-intro {
-    font-size: 14px;
-    color: #888;
-    font-weight: 600;
-    opacity: 60%;
-}
-
-.landing-code-btn {
-    min-width: 85px;
-    min-height: 25px;
-    font-size: 10px;
-    border: 1px solid #181818;
-    background: #000;
-    color: #fff;
-    border-radius: 2px;
-    cursor: pointer;
-    padding: 4px 12px;
-    margin-right: 10px;
-    letter-spacing: 0.03em;
-    font-weight: 700;
+    font-size: 15px;
+    background: none;
+    border: none;
+    padding: 0;
+    opacity: 1;
+    transition: opacity 0.35s cubic-bezier(.23, 1.03, .49, .98);
 }
 
 .side-btn .diamond-wrap {
@@ -130,26 +103,51 @@ html {
     transition: inherit;
 }
 
-.side-btn {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 600;
-    font-size: 15px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    pointer-events: auto;
-    padding: 0;
-    opacity: 1;
-}
-
+.side-chevron-hidden,
 .side-btn-hidden {
     opacity: 0;
-    pointer-events: none;
     transition: opacity 0.25 cubic-bezier(.23, 1.03, .49, .98);
 }
 
+/* ==========================
+   LOGO & HEADER
+   ========================== */
+.landing-logo {
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.skinstric-bold {
+    font-weight: 600;
+    padding: 2px 8px;
+    font-size: 14px;
+}
+
+.landing-intro {
+    font-size: 14px;
+    color: #888;
+    font-weight: 600;
+    opacity: 60%;
+}
+
+.landing-code-btn {
+    min-width: 35px;
+    min-height: 25px;
+    font-size: 10px;
+    border: 1px solid #181818;
+    background: #000;
+    color: #fff;
+    font-weight: 700;
+    margin-right: 5px;
+    padding: 5px 8px;
+}
+
+/* ==========================
+   MAIN HERO TITLE
+   ========================== */
 .landing-main {
     position: absolute;
     top: 0;
@@ -159,23 +157,52 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 5;
-    pointer-events: none;
+    opacity: 0;
+    transform: translateY(40px);
+    transition:
+        opacity 1.7s cubic-bezier(.4, 1, .54, 1),
+        transform 1.7s cubic-bezier(.4, 1, .54, 1);
+}
+
+.landing-main.landing-main-visable {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .landing-main h1 {
     font-size: 128px;
     font-weight: 300;
     letter-spacing: -7%;
-    line-height: 120px;
+    line-height: 125px;
     color: #181818;
     text-align: center;
     margin: 0;
-    transition: transform 0.7s cubic-bezier(.23, 1.03, .49, .98)
+    transition: transform 0.8s cubic-bezier(.23, 1.03, .49, .98), opacity 0.6s cubic-bezier(.23, 1.03, .49, .98);
+    will-change: transform, opacity;
+    position: relative;
 }
 
-.move-headline .landing-main h1 {
-    transform: translateX(32vw) scale(0.95);
+.headline-skincare {
+    display: inline-block;
+    transition: transform 0.8s cubic-bezier(.23, 1.03, .49, .98), text-align 0.6s cubic-bezier(.23, 1.03, .49, .98);
+}
+
+.skincare-move-left {
+    transform: translateX(120px);
+}
+
+.skincare-move-right {
+    transform: translateX(-120px);
+}
+
+.move-right {
+    transform: translateX(15vw);
+    opacity: 1;
+}
+
+.move-left {
+    transform: translateX(-15vw);
+    opacity: 1;
 }
 
 .landing-side-text {
@@ -186,8 +213,13 @@ html {
     size: 14px;
     opacity: 70%;
     letter-spacing: -2%;
+    display: inline-block;
+    transition: transform 0.5s cubic-bezier(.23, 1.03, .49, .98), opacity 0.4s cubic-bezier(.23, 1.03, .49, .98);
 }
 
+/* ==========================
+   LANDING DESC
+   ========================== */
 .landing-desc {
     position: absolute;
     left: 34px;
@@ -201,4 +233,114 @@ html {
     z-index: 5;
     opacity: 0.9;
     max-width: 400px;
+}
+
+/* ==========================
+   MOBILE HERO (HIDDEN ON DESKTOP)
+   ========================== */
+.landing-hero-mobile {
+    display: none;
+}
+
+/* ==========================
+   RESPONSIVE (MAX-WIDTH 700px)
+   ========================== */
+@media (max-width: 700px) {
+    .landing-hero-mobile {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .diamond-outer {
+        width: min(70vw, 95vh);
+        height: min(70vw, 95vh);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2.5px dotted #d3d3d3;
+        box-sizing: border-box;
+        transform: rotate(45deg);
+        background: #fff;
+        overflow: visible;
+    }
+
+    .diamond-inner {
+        width: 80%;
+        height: 80%;
+        border: 2.5px dotted #d3d3d3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: rotate(0deg);
+        background: #fff;
+        position: relative;
+    }
+
+    .hero-content {
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: rotate(-45deg);
+        position: relative;
+        z-index: 2;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .hero-headline {
+        font-size: clamp(2rem, 7vw, 2.5rem);
+        font-weight: 400;
+        color: #181818;
+        margin-bottom: 16px;
+        line-height: 1.12;
+        letter-spacing: -0.5px;
+    }
+
+    .hero-subtext {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 22px;
+        font-weight: 400;
+        line-height: 1.4;
+        max-width: 92vw;
+    }
+
+    .diamond-hero-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        color: #000000;
+        font-size: 12px;
+        font-weight: 700;
+        margin-top: 5px;
+        min-width: 180px;
+    }
+
+    .diamond-hero-btn-icon img {
+        display: inline-block;
+    }
+
+    .diamond-hero-btn-text {
+        display: inline-block;
+        vertical-align: middle;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+    }
+
+    /* Hide desktop stuff on mobile */
+    .side-chevron,
+    .chevron-content,
+    .landing-main,
+    .landing-desc,
+    .header {
+        display: none;
+    }
 }

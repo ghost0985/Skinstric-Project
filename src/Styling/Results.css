@@ -1,0 +1,321 @@
+/* ================================
+   GLOBAL BASE & LAYOUT
+   ================================ */
+body,
+html,
+#root {
+    height: 100%;
+    margin: 0;
+    background: #fff;
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+/* .Results-container for the whole page */
+.Results-container {
+    min-height: 100vh;
+    width: 100vw;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    font-family: inherit;
+}
+
+/* ================================
+   HEADER
+   ================================ */
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 24px 44px 0 28px;
+    box-sizing: border-box;
+}
+
+.skinstric-link { text-decoration: none; }
+.skinstric-bold {
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1.2px;
+    color: #181818;
+}
+.landing-intro {
+    color: #919090;
+    font-size: 12px;
+    margin-left: 6px;
+}
+.Test-subtitle {
+    margin-top: 16px;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+    color: #232323;
+}
+
+/* ================================
+   PREVIEW IMAGE (top right)
+   ================================ */
+.results-preview-block {
+    position: absolute;
+    right: 50px;
+    top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 30px;
+}
+.results-preview-label {
+    font-size: 13px;
+    color: #222;
+    margin-bottom: 3px;
+}
+.results-preview-box {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+/* ================================
+   MAIN DIAMOND CARDS ROW
+   ================================ */
+.center-row {
+    min-height: calc(100vh - 160px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 480px;
+    margin-top: 80px;
+}
+.results-diamond-card {
+    position: relative;
+    width: 380px;
+    height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.diamond-stack-results {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 300px;
+    height: 300px;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+.diamond-results {
+    position: absolute;
+    width: 282px;
+    height: 282px;
+    left: 50%;
+    top: 50%;
+    border: 2px dotted #bdbdbd;
+    background: none;
+    opacity: 0.38;
+}
+.results-diamond1 {
+    animation: diamond-rotate 45s linear infinite;
+    transform: translate(-50%, -50%) rotate(9deg);
+}
+.results-diamond2 {
+    animation: diamond-rotate 40s linear infinite;
+    transform: translate(-50%, -50%) rotate(-7deg);
+}
+.results-diamond3 {
+    animation: diamond-rotate 35s linear infinite;
+    transform: translate(-50%, -50%) rotate(0deg);
+}
+
+/* ================================
+   ICON BUTTONS (camera/gallery)
+   ================================ */
+.icon-circle {
+    z-index: 12;
+}
+.icon-circle img {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+    transition: transform 0.22s cubic-bezier(0.42, 0, 0.58, 1);
+    transition: width 0.4s cubic-bezier(.42, 0, .58, 1),
+        height 0.4s cubic-bezier(.42, 0, .58, 1);
+}
+.icon-circle img:hover {
+    transform: scale(1.05);
+}
+.dimmed {
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 0.25s cubic-bezier(.23, 1.03, .49, .98);
+}
+
+/* ================================
+   LABELS & ARROWS
+   ================================ */
+.card-label {
+    position: absolute;
+    z-index: 10;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #000000;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    line-height: 2;
+    width: 150%;
+}
+.icon-and-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.card-label.gallery {
+    left: -35%;
+    top: 125%;
+    transform: translate(-50%);
+    position: absolute;
+}
+.card-arrow.gallery {
+    margin-top: -125px;
+    margin-left: -126px;
+}
+.card-label.camera {
+    left: 215%;
+    top: -30%;
+    transform: translate(-50%);
+}
+.card-arrow.camera {
+    margin-top: -130px;
+    margin-left: -130px;
+    position: static;
+}
+.card-arrow line {
+    stroke: #000000;
+    stroke-width: 1.5;
+}
+.card-arrow circle {
+    fill: #000000;
+    stroke: none;
+}
+
+/* ================================
+   SUCCESS ALERT
+   ================================ */
+.custom-alert-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(0, 0, 0, 0.18);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 36px;
+}
+.custom-alert-box {
+    min-width: 500px;
+    background: #232323;
+    color: #fff;
+    box-shadow: 0 4px 18px 0 #0004;
+    padding: 28px 36px 24px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    font-family: inherit;
+}
+.custom-alert-title {
+    font-size: 15px;
+    color: #b2e2f5;
+    font-weight: 600;
+    margin-bottom: 14px;
+    font-family: inherit;
+}
+.custom-alert-message {
+    font-size: 15px;
+    color: #fff;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-family: inherit;
+}
+.custom-alert-btn {
+    margin-left: auto;
+    margin-right: 0;
+    padding: 7px 23px;
+    border: 2px solid #b2cff5;
+    background: #d6e5ff;
+    color: #232323;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.18s, border 0.18s;
+}
+.custom-alert-btn:hover {
+    background: #c5dfff;
+    border-color: #7fc9f8;
+}
+
+/* ================================
+   ANIMATIONS
+   ================================ */
+@keyframes diamond-rotate {
+    0% { transform: translate(-50%, -50%) rotate(9deg);}
+    100% { transform: translate(-50%, -50%) rotate(369deg);}
+}
+
+/* ================================
+   RESPONSIVE ADJUSTMENTS (<=700px)
+   ================================ */
+@media (max-width: 700px) {
+    .header {
+        padding: 18px 3vw 0 4vw;
+    }
+    .Results-container {
+        padding: 0 1vw 16px 1vw;
+    }
+    .results-preview-box {
+        width: 96px;
+        height: 96px;
+    }
+    .center-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        margin-top: 150px;
+    }
+    .results-diamond-card {
+        width: 270px;
+        height: 270px;
+    }
+    .results-diamond-stack {
+        width: 150px;
+        height: 150px;
+    }
+    .diamond-results {
+        width: 150px;
+        height: 150px;
+    }
+    .icon-circle {
+        width: 110px;
+        height: 110px;
+    }
+    .icon-circle img {
+        width: 110px;
+        height: 110px;
+    }
+    .back-btn {
+        left: 3vw;
+        bottom: 7px;
+    }
+    .card-arrow {
+        display: none;
+    }
+    .card-label.camera {
+        margin-top: 150px;
+        margin-left: -180px;
+    }
+    .card-label.gallery {
+        margin-left: 180px;
+        margin-top: -20px;
+    }
+}

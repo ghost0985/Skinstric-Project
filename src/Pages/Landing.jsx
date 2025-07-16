@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LeftDiamond from "../assets/LeftArrow.png";
 import RightDiamond from "../assets/RightArrow.png";
 import "../Styling/Landing.css";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   const [headlinePosition, setHeadlinePosition] = useState("center");
+  const [mainVisable, setMainVisable] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setMainVisable(true), 350);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   return (
     <div className="landing-container">
       <svg
-        className="side-chevron left-chevron"
+        className={`side-chevron left-chevron${
+          headlinePosition === "left" ? " side-chevron-hidden" : ""
+        }`}
         width="38vw"
         height="100vh"
         viewBox="0 0 180 100"
@@ -25,7 +36,7 @@ const LandingPage = () => {
       <div className="chevron-content left-chevron-content">
         <button
           className={`side-btn${
-            headlinePosition === "left" ? " sine-btn-hidden" : ""
+            headlinePosition === "left" ? " side-btn-hidden" : ""
           }`}
           onMouseEnter={() => setHeadlinePosition("right")}
           onMouseLeave={() => setHeadlinePosition("center")}
@@ -42,7 +53,9 @@ const LandingPage = () => {
       </div>
 
       <svg
-        className="side-chevron right-chevron"
+        className={`side-chevron right-chevron${
+          headlinePosition === "right" ? " side-chevron-hidden" : ""
+        }`}
         width="38vw"
         height="100vh"
         viewBox="0 0 180 100"
@@ -56,7 +69,8 @@ const LandingPage = () => {
         />
       </svg>
       <div className="chevron-content right-chevron-content">
-        <button
+        <Link
+          to="/Testing"
           className={`side-btn${
             headlinePosition === "right" ? " side-btn-hidden" : ""
           }`}
@@ -71,10 +85,10 @@ const LandingPage = () => {
               className="diamond-icon"
             />
           </span>
-        </button>
+        </Link>
       </div>
 
-      <div className="landing-header">
+      <div className="header">
         <div className="landing-logo">
           <span className="skinstric-bold">SKINSTRIC</span>
           <span className="landing-intro">[ INTRO ]</span>
@@ -82,7 +96,9 @@ const LandingPage = () => {
         <button className="landing-code-btn">ENTER CODE</button>
       </div>
 
-      <div className="landing-main">
+      <div
+        className={`landing-main${mainVisable ? " landing-main-visable" : ""}`}
+      >
         <h1
           className={
             headlinePosition === "center"
@@ -93,8 +109,43 @@ const LandingPage = () => {
           }
         >
           Sophisticated <br />
-          skincare
+          <span
+            className={
+              `headline-skincare` +
+              (headlinePosition === "right"
+                ? " skincare-move-left"
+                : headlinePosition === "left"
+                ? " skincare-move-right"
+                : "")
+            }
+          >
+            skincare
+          </span>
         </h1>
+      </div>
+
+      <div className="landing-hero-mobile">
+        <div className="diamond-outer">
+          <div className="diamond-inner">
+            <div className="hero-content">
+              <div className="hero-headline">
+                Sophisticated
+                <br />
+                skincare
+              </div>
+              <div className="hero-subtext">
+                Skinstric developed an A.I. that creates a highly-personalized
+                routine tailored to what your skin needs.
+              </div>
+              <Link to="/Testing" className="diamond-hero-btn">
+                <span className="diamond-hero-btn-text">ENTER EXPERIENCE</span>
+                <span className="diamond-hero-btn-icon">
+                  <img src={LeftDiamond} alt="" />
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="landing-desc">

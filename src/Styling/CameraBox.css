@@ -1,0 +1,102 @@
+/* ===========================
+   Overlay & Modal Container
+   =========================== */
+.camera-modal-overlay {
+    position: fixed;
+    left: 450px;
+    top: 0;
+    width: 40vw;
+    height: 105vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.camera-modal-box {
+    background: #181818;
+    width: 375px;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.15);
+    font-family: inherit;
+    overflow: hidden;
+}
+
+/* ===========================
+   Modal Title
+   =========================== */
+.camera-modal-title {
+    color: #fff;
+    font-weight: 700;
+    padding: 32px 28px 28px 28px;
+    font-size: 15px;
+    letter-spacing: 0.7px;
+    border-bottom: 1px solid #dfdddd;
+}
+
+/* ===========================
+   Modal Actions (Buttons Row)
+   =========================== */
+.camera-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* ===========================
+   Modal Buttons
+   =========================== */
+.camera-modal-btn {
+    background: none;
+    border: none;
+    padding: 18px 32px 18px 0;
+    font-size: 16px;
+    cursor: pointer;
+    letter-spacing: 1.1px;
+    transition: color 0.18s;
+}
+
+.camera-modal-btn.deny {
+    color: #bababa;
+    font-weight: 500;
+    padding-right: 15;
+}
+
+.camera-modal-btn.allow {
+    color: #fff;
+    font-weight: 700;
+    padding-left: 4px;
+    padding-right: 36px;
+}
+
+.camera-modal-btn.allow:hover,
+.camera-modal-btn.deny:hover {
+    text-decoration: underline;
+}
+
+/* ===========================
+   Dimmed State for Diamonds/Card
+   =========================== */
+.diamond-card.dimmed,
+.card-label.dimmed,
+.card-arrow.dimmed line,
+.card-arrow.dimmed circle {
+    opacity: 0.4;
+    pointer-events: none;
+    transition: opacity 0.18s;
+}
+
+/* ===========================
+   Responsive: Mobile Styles
+   =========================== */
+@media (max-width: 700px) {
+    .camera-modal-overlay {
+        left: 0px;
+        top: -10%;
+        width: 100%;
+        height: 100%;
+    }
+
+    .camera-modal-actions {
+        justify-content: flex-start;
+        margin-left: 35px;
+    }
+}

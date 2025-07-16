@@ -1,0 +1,197 @@
+/* ====================================
+   GLOBAL / PAGE LAYOUT
+   ==================================== */
+.select-page {
+    min-height: 100vh;
+    width: 100vw;
+    background: #fff;
+    font-family: 'Inter', Arial, sans-serif;
+    position: relative;
+}
+
+/* ====================================
+   SUBTEXT
+   ==================================== */
+.select-subtext {
+    font-size: 14px;
+    color: #232323;
+    margin-bottom: 0;
+    line-height: 1.38;
+    margin-top: 10px;
+    margin-left: 9px;
+}
+
+/* ====================================
+   CENTER DIAMOND CONTAINER
+   ==================================== */
+.diamond-center {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ====================================
+   DIAMOND GRID & ITEMS
+   ==================================== */
+.diamond-grid-fixed {
+    position: relative;
+    width: 395px;
+    height: 395px;
+}
+
+/* Individual Diamonds */
+.diamond-fixed {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    background: oklch(0.967 0.003 264.542);
+    color: #000000;
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    box-sizing: border-box;
+    transition: box-shadow 0.2s;
+}
+
+.diamond-fixed span,
+.diamond-fixed br {
+    transform: rotate(-45deg);
+    display: inline-block;
+}
+
+/* ====================================
+   DIAMOND POSITIONS
+   ==================================== */
+.diamond-top {
+    background-color: oklch(0.928 0.006 264.531);
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0) rotate(45deg);
+    transition: transform 0.25s cubic-bezier(.45, 1.66, .41, .84), box-shadow 0.25s;
+    will-change: transform;
+    transform-origin: center center;
+    cursor: pointer;
+}
+
+.diamond-top:hover {
+    transform: translate(-50%, 0) rotate(45deg) scale(1.05);
+    z-index: 4;
+    box-shadow: 0 8px 24px 0 #bdbdbd33;
+}
+
+.diamond-bottom {
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 0) rotate(45deg);
+}
+
+.diamond-left {
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%) rotate(45deg);
+}
+
+.diamond-right {
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%) rotate(45deg);
+}
+
+.diamond-bottom,
+.diamond-left,
+.diamond-right {
+    cursor: not-allowed;
+}
+
+/* ====================================
+   DIAMOND OUTLINE ON HOVER
+   ==================================== */
+.diamond-border-outline {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    border: 2px dotted #bdbdbd;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg) scale(0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity 0.3s cubic-bezier(.57, 1.36, .65, 1.04),
+        transform 0.45s cubic-bezier(.57, 1.36, .65, 1.04);
+    z-index: 2;
+}
+
+.diamond-top:hover~.diamond-border-outline {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+}
+
+.diamond-left:hover~.diamond-border-outline,
+.diamond-right:hover~.diamond-border-outline {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(45deg) scale(1.15);
+}
+
+.diamond-bottom:hover~.diamond-border-outline {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(45deg) scale(1.25);
+}
+
+/* ====================================
+   BUTTONS / NAVIGATION
+   ==================================== */
+.select-next-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    color: #181818;
+    z-index: 20;
+}
+
+.next-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: #181818;
+    letter-spacing: 0.04em;
+    padding-right: 10px;
+}
+
+.select-next-btn:hover .Back-btn-wrapper,
+.back-btn:focus-visible .Back-btn-wrapper {
+    transform: scale(1.25);
+}
+
+
+/* ====================================
+   RESPONSIVE: DIAMOND GRID SCALE
+   ==================================== */
+@media (max-width: 900px) {
+    .diamond-grid {
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 700px) {
+    .diamond-grid {
+        transform: scale(0.6);
+    }
+
+    /* Next Button  */
+
+    .select-next-btn {
+        position: absolute;
+        bottom: 8px;
+        right: 5px;
+    }
+}
