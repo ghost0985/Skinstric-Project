@@ -391,4 +391,8 @@
     .cameraPage::after {
         display: none;
     }
+
+    .usePhotoBtn, .retakeBtn{
+        margin-bottom: 60px;
+    }
 }
